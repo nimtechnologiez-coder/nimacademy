@@ -4,7 +4,7 @@ import Navbar from "../components/Navbar"
 function Applynow() {
   return (
     <div className="apply-body">
-      <div className="main-wrapper">
+      <div className="main-wrapperr">
      <Navbar/>
         {/* Hero Section */}
         <div className="apply">

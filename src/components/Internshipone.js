@@ -5,7 +5,7 @@ import Navbar from "../components/Navbar"
 function Internship() {
   return (
     <div className="inte-body">
-      <div className="main-wrapper">
+      <div className="main-wrapperr">
        
        <Navbar/>
  

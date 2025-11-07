@@ -520,7 +520,7 @@ This MERN Stack training program offers hands-on projects in front-end, back-end
 function Courses() {
   return (
     <div className="course-body">
-      <div className="main-wrapper">
+      <div className="main-wrapperr">
         <Navbar/>
         <div className="course">
           <h1 className="course-title">

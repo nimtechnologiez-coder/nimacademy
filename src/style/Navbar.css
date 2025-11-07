@@ -1,302 +1,207 @@
-/* 🌟 Base Navbar */
-.nim-navbar {
-  height: 50px;
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+ 
+body {
+  background: linear-gradient(180deg, #fff, #f4f8ff);
+  overflow-x: hidden;
+}
+ 
+/* ✅ Transparent Navbar */
+/* .transparent-nav {
+  width: 100%;
+  height: 80px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-radius: 50px;
-  background: #ffffff;
-  padding: 10px 25px;
-  margin: 10px auto;
-  width: 90%;
-  max-width: 1000px;
-  box-shadow: 3px 6px 11px rgba(45, 106, 141, 0.1);
-  position: relative;
-  z-index: 100;
-  transition: all 0.3s ease;
-}
-
-/* 🌟 Logo */
-.nim-logo img {
-  width: 50px;
-  height: 50px;
-  object-fit: contain;
-  margin-right: 5px;
-}
-
-.nim-logo-border {
-  border: 2.5px solid #b3de61;
-  border-radius: 14px;
-  padding: 4px 8px;
-}
-.nim-logo-title {
-  font-weight: bold;
-  font-size: clamp(15px, 2vw, 20px);
-  color: #1093c1;
-}
-.nim-logo-subtitle {
-  font-size: clamp(9px, 1.5vw, 11px);
-  font-weight: 600;
-  color: #8cbe3e;
-}
-
-/* 🌟 Desktop Nav Links */
-.nim-nav-links {
+  padding: 0 3rem;
+  z-index: 1000;
+} */
+ 
+.transparent-nav {
+  width: 100%;
+  height: 80px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  backdrop-filter: blur(10px);
+  background: rgba(255, 251, 255, 0.9); /* ✅ Soft pinkish-white background */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
   display: flex;
-  list-style: none;
-  gap: 20px;
-  padding: 0;
-  margin: 8px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 3rem;
+  z-index: 1000;
 }
-.nim-nav-links li {
-  font-size: clamp(13px, 1.5vw, 17px);
-  font-weight: 600;
-  color: #161616;
-  cursor: pointer;
-  padding: 8px 18px;
-  border-radius: 25px;
-  transition: all 0.2s ease;
+ 
+/* ✅ Logo */
+.logo-img {
+  height: 58px;
+  object-fit: contain;
 }
-.nim-nav-links li a {
+ 
+/* ✅ Desktop Nav Links */
+.nav-links {
+  display: flex;
+  gap: 2.2rem;
+  align-items: center;
+}
+ 
+.nav-links a {
   text-decoration: none;
-  color: inherit;
-}
-.nim-nav-links li:hover,
-.nim-nav-links li.active {
-  background: #0654a7;
-  color: #ffffff;
-  box-shadow: 0 3px 13px rgba(8, 84, 150, 0.2);
-}
-
-/* 🌟 Apply Button */
-.nim-btn-wrap .nim-apply-btn {
+  color: #111;
+  font-size: 1.15rem; /* increased font */
   font-weight: 600;
-  font-size: clamp(13px, 1.5vw, 17px);
-  padding: 9px 22px;
-  background: #ffffff;
-  color: #1093c1;
-  border: 2px solid #1093c1;
-  border-radius: 35px;
-  cursor: pointer;
   transition: all 0.3s ease;
 }
-.nim-btn-wrap .nim-apply-btn:hover {
-  background: #0654a7;
-  color: #ffffff;
-  box-shadow: 0 3px 13px rgba(8, 84, 150, 0.2);
+ 
+.nav-links a:hover {
+  color: #007bff;
+  transform: scale(1.08);
 }
-
-/* 🌟 Hamburger Icon */
-.nim-hamburger {
+ 
+/* ✅ CTA (Apply Now) */
+.nav-links .cta {
+  background: #007bff;
+  color: #fff !important;
+  padding: 0.7rem 1.4rem;
+  border-radius: 25px;
+  font-size: 1.1rem; /* increased */
+  font-weight: 700;
+  transition: 0.3s ease;
+}
+ 
+.nav-links .cta:hover {
+  background: #0056b3;
+  transform: scale(1.05);
+}
+ 
+/* ✅ Hamburger */
+.hamburger {
   display: none;
   flex-direction: column;
   justify-content: space-between;
-  width: 25px;
-  height: 20px;
+  width: 30px;
+  height: 22px;
   cursor: pointer;
-  z-index: 101;
-  transition: all 0.3s ease;
 }
-.nim-hamburger .bar {
+ 
+.hamburger span {
   height: 3px;
   width: 100%;
-  background-color: #1093c1;
-  border-radius: 10px;
-  transition: all 0.3s ease;
+  background: #111;
+  border-radius: 5px;
+  transition: 0.4s;
 }
-.nim-hamburger.open .bar:nth-child(1) {
-  transform: rotate(45deg) translateY(8px);
-}
-.nim-hamburger.open .bar:nth-child(2) {
-  opacity: 0;
-}
-.nim-hamburger.open .bar:nth-child(3) {
-  transform: rotate(-45deg) translateY(-8px);
-}
-
-/* 🌟 Mobile Slide Menu */
-.nim-mobile-menu {
-  display: none;
-}
-.nim-mobile-menu.active {
-  display: flex;
-  flex-direction: column;
+ 
+/* ✅ Overlay */
+.overlay {
   position: fixed;
   top: 0;
-  right: 0;
-  height: 100vh;
-  width: 75%;
-  max-width: 280px;
-  background: #ffffff;
-  box-shadow: -5px 0 20px rgba(0, 0, 0, 0.15);
-  padding: 100px 20px 40px;
-  animation: slideIn 0.3s ease forwards;
-  z-index: 100;
+  left: 0;
+  width: 100%;
+  height: 0;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(15px);
+  overflow: hidden;
+  transition: height 0.4s ease;
+  z-index: 999;
 }
-@keyframes slideIn {
-  from {
-    transform: translateX(100%);
-  }
-  to {
-    transform: translateX(0);
-  }
+ 
+.overlay.open {
+  height: 100%;
 }
-.nim-mobile-menu ul {
-  list-style: none;
-  padding: 0;
-  margin-top: 20px;
+ 
+/* ✅ Overlay Inner */
+.overlay-inner {
   display: flex;
   flex-direction: column;
-  gap: 25px;
-  text-align: center;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 2.2rem;
 }
-.nim-mobile-menu li a {
-  font-size: clamp(15px, 4vw, 20px);
-  font-weight: 600;
-  color: #0654a7;
+ 
+.overlay-inner a {
   text-decoration: none;
-  transition: color 0.3s ease;
+  color: #111;
+  font-size: 1.8rem; /* increased mobile menu font */
+  font-weight: 700;
+  transition: 0.3s ease;
 }
-.nim-mobile-menu li a:hover {
-  color: #9cd947;
+ 
+.overlay-inner a:hover {
+  color: #007bff;
+  transform: scale(1.1);
 }
-.nim-mobile-apply {
-  margin-top: 40px;
-  padding: 13px 28px;
-  border: none;
-  background: #1093c1;
-  color: #fff;
-  font-size: clamp(14px, 3vw, 18px);
-  font-weight: 600;
+ 
+/* ✅ Mobile Apply Now Button */
+.cta-btn {
+  display: inline-block;
+  background: #007bff;
+  color: #fff !important;
+  padding: 0.9rem 2.2rem;
   border-radius: 35px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-top: 1.8rem;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+ 
+.cta-btn:hover {
+  background: #0056b3;
+  transform: scale(1.08);
+}
+ 
+/* ✅ Close Button */
+.close-btn {
+  position: absolute;
+  top: 25px;
+  right: 35px;
+  background: none;
+  border: none;
+  font-size: 2.8rem;
+  color: #111;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: 0.3s ease;
 }
-.nim-mobile-apply:hover {
-  background: #9cd947;
-  color: #003d9c;
+ 
+.close-btn:hover {
+  color: #007bff;
 }
-
-/* 🌟 Tablet (max 900px) */
-@media (max-width: 900px) {
-  .nim-nav-links,
-  .nim-btn-wrap {
+ 
+/* ✅ Responsive */
+@media (max-width: 991px) {
+  .nav-links {
     display: none;
   }
-
-  .nim-navbar {
-    width: 94%;
-    height: 40px;
-    padding: 12px 18px; 
-    border-radius: 30px;
-    flex-direction: column;
-    align-items: flex-start;
-    position: relative;
-  }
-
-  /* 🔹 Move hamburger to top-right */
-  .nim-hamburger {
+ 
+  .hamburger {
     display: flex;
-    position: absolute;
-    top: 15px;
-    right: 20px;
-  }
-
-  .nim-logo {
-    margin-top: 8px;
-    margin-left: 5px;
-  }
-
-  .nim-logo-border {
-    padding: 3px 6px;
   }
 }
-
-/* 🌟 Small Phones (max 500px) */
-@media (max-width: 500px) {
-  .nim-navbar {
-    padding: 2px 15px;
-    border-radius: 25px;
-    
+ 
+@media (max-width: 480px) {
+  .overlay-inner a {
+    font-size: 1.5rem; /* slightly smaller for tiny screens */
   }
-  .nim-logo-border {
-    border-width: 2px;
-    padding: 2px 5px;
+ 
+  .cta-btn {
+    font-size: 1.3rem;
+    padding: 0.8rem 2rem;
   }
-  .nim-logo-title {
-    font-size: 15px;
-  }
-  .nim-logo-subtitle {
-    font-size: 9px;
-  }
-  .nim-hamburger {
-    width: 22px;
-    height: 18px;
-    top: 12px;
-    right: px;
-  }
-  .nim-mobile-menu.active {
-    width: 60%;
+ 
+  .transparent-nav {
+    padding: 0 1.3rem;
   }
 }
-
-/* 🌟 Extra Small (max 350px) */
-@media (max-width: 350px) {
-  .nim-navbar {
-    width: 84%;
-    padding: 7px 12px;
-    
-    
-  }
-  .nim-logo {
-    gap: 4px;
-  }
-  .nim-logo-title {
-    font-size: 14px;
-  }
-  .nim-logo-subtitle {
-    font-size: 8px;
-  }
-  .nim-mobile-menu li a {
-    font-size: 15px;
-  }
-}
-
-/* 🌟 Desktop Reset */
-@media (min-width: 901px) {
-  .nim-mobile-menu {
-    display: one !important;
-  }
-}
-
-/* 🌟 Logo */
-.nim-logo img {
-  width: clamp(35px, 5vw, 60px); /* min 35px, scales up to 60px */
-  height: auto; /* keeps proper aspect ratio */
-  object-fit: contain;
-  margin-right: 5px;
-}
-
-/* Tablet screens (max 900px) */
-@media (max-width: 900px) {
-  .nim-logo img {
-    width: clamp(30px, 6vw, 50px);
-  }
-}
-
-/* Small phones (max 500px) */
-@media (max-width: 500px) {
-  .nim-logo img {
-    width: 35px;
-  }
-}
-
-/* Extra small (max 350px) */
-@media (max-width: 350px) {
-  .nim-logo img {
-    width: 30px;
-  }
-}
-
-
-

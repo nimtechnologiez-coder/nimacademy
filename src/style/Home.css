@@ -10,7 +10,7 @@
 .main-wrapperr {
   border-radius: 25px;
   background: linear-gradient(to bottom, #19c3ed 0%, #0c5fba 100%);
-  margin: 10px;
+  margin: 0px;
   min-height: 82vh;
   display: flex;
   justify-content: center;

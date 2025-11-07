@@ -138,7 +138,7 @@ function Colleges() {
 function Institution() {
   return (
     <div className="apply-body">
-      <div className="main-wrapper">
+      <div className="main-wrapperr">
         <Navbar />
         <div className="hero">
           <h1 className="ins-title">

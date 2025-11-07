@@ -9,7 +9,7 @@ import "../style/Contact.css";
 function Contact() {
   return (
     <div className="contact-body">
-      <div className="main-wrapper">
+      <div className="main-wrapperr">
         {/* Navbar */}
         <Navbar />
 

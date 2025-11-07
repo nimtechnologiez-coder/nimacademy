@@ -1,98 +1,104 @@
-import React, { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import React, { useEffect, useRef, useState } from "react";
 import "../style/Navbar.css";
-import logo from "../images/nimlogo.png"; // ✅ your logo image (place it in src/assets folder)
-
+import logo from "../images/nimlogo.png";
+ 
 const Navbar = () => {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const location = useLocation();
-
-  const toggleMenu = () => setMenuOpen((prev) => !prev);
-
+  const [open, setOpen] = useState(false);
+  const hamburgerRef = useRef(null);
+ 
   useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth > 900) setMenuOpen(false);
+    const handleKey = (e) => {
+      if (e.key === "Escape") setOpen(false);
     };
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    document.addEventListener("keydown", handleKey);
+    return () => document.removeEventListener("keydown", handleKey);
   }, []);
-
-  const handleLinkClick = () => setMenuOpen(false);
-
+ 
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+ 
+    const spans = hamburgerRef.current?.querySelectorAll("span");
+    if (spans && spans.length === 3) {
+      if (open) {
+        spans[0].style.transform = "rotate(45deg) translateY(8px)";
+        spans[1].style.opacity = "0";
+        spans[2].style.transform = "rotate(-45deg) translateY(-8px)";
+      } else {
+        spans[0].style.transform = "";
+        spans[1].style.opacity = "1";
+        spans[2].style.transform = "";
+      }
+    }
+  }, [open]);
+ 
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const handleLinkClick = () => setOpen(false);
+ 
   return (
-    <nav className={`nim-navbar ${menuOpen ? "menu-open" : ""}`}>
-      {/* 🌟 Logo with Image */}
-      <div className="nim-logo">
-        <Link to="/" className="nim-logo-link">
-          <img src={logo} alt="NIM Academy Logo" className="nim-logo-img" />
-          
-        </Link>
-      </div>
-
-      {/* 🌟 Hamburger Icon */}
+    <>
+      <nav className="transparent-nav" aria-label="Main navigation">
+        <div className="logo">
+          <img src={logo} alt="NIM Company Logo" className="logo-img" />
+        </div>
+ 
+        <div className="nav-links">
+          <a href="/">Home</a>
+          <a href="/courses">Courses</a>
+          <a href="/nextgen">NextGen</a>
+          <a href="/internship">Internship</a>
+          <a href="/contact">Contact Us</a>
+          <a href="/apply" className="cta">Apply Now</a>
+        </div>
+ 
+        <div
+          className="hamburger"
+          ref={hamburgerRef}
+          role="button"
+          tabIndex={0}
+          aria-label={open ? "Close menu" : "Open menu"}
+          onClick={open ? handleClose : handleOpen}
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </nav>
+ 
+      {/* ✅ Overlay for mobile */}
       <div
-        className={`nim-hamburger ${menuOpen ? "open" : ""}`}
-        onClick={toggleMenu}
-        role="button"
-        tabIndex={0}
+        className={`overlay ${open ? "open" : ""}`}
+        aria-hidden={!open}
+        role="dialog"
+        aria-modal="true"
       >
-        <div className="bar"></div>
-        <div className="bar"></div>
-        <div className="bar"></div>
+        <button
+          className="close-btn"
+          aria-label="Close menu"
+          onClick={handleClose}
+        >
+          &times;
+        </button>
+ 
+        <div className="overlay-inner" role="menu" aria-label="Main menu">
+          <a href="/" role="menuitem" onClick={handleLinkClick}>Home</a>
+          <a href="/courses" role="menuitem" onClick={handleLinkClick}>Courses</a>
+          <a href="/nextgen" role="menuitem" onClick={handleLinkClick}>NextGen</a>
+          <a href="/internship" role="menuitem" onClick={handleLinkClick}>Internship</a>
+          <a href="/contact" role="menuitem" onClick={handleLinkClick}>Contact Us</a>
+ 
+          {/* ✅ Added Apply Now Button for mobile view */}
+          <a href="/apply" className="cta-btn" role="menuitem" onClick={handleLinkClick}>
+            Apply Now
+          </a>
+        </div>
       </div>
-
-      {/* 🌟 Desktop Menu */}
-      <ul className="nim-nav-links">
-        <li className={location.pathname === "/" ? "active" : ""}>
-          <Link to="/">Home</Link>
-        </li>
-        <li className={location.pathname === "/courses" ? "active" : ""}>
-          <Link to="/courses">Courses</Link>
-        </li>
-        <li className={location.pathname === "/nextgen" ? "active" : ""}>
-          <Link to="/nextgen">NextGen</Link>
-        </li>
-        <li className={location.pathname === "/internship" ? "active" : ""}>
-          <Link to="/internship">Internship</Link>
-        </li>
-        <li className={location.pathname === "/contact" ? "active" : ""}>
-          <Link to="/contact">Contact Us</Link>
-        </li>
-      </ul>
-
-      {/* 🌟 Apply Button */}
-      <div className="nim-btn-wrap">
-        <Link to="/apply">
-          <button className="nim-apply-btn">Apply Now</button>
-        </Link>
-      </div>
-
-      {/* 🌟 Mobile Slide Menu */}
-      <div className={`nim-mobile-menu ${menuOpen ? "active" : ""}`}>
-        <ul>
-          <li>
-            <Link to="/" onClick={handleLinkClick}>Home</Link>
-          </li>
-          <li>
-            <Link to="/courses" onClick={handleLinkClick}>Courses</Link>
-          </li>
-          <li>
-            <Link to="/nextgen" onClick={handleLinkClick}>NextGen AI</Link>
-          </li>
-          <li>
-            <Link to="/internship" onClick={handleLinkClick}>Internship</Link>
-          </li>
-          <li>
-            <Link to="/contact" onClick={handleLinkClick}>Contact Us</Link>
-          </li>
-        </ul>
-
-        <Link to="/apply" onClick={handleLinkClick}>
-          <button className="nim-mobile-apply">Apply Now</button>
-        </Link>
-      </div>
-    </nav>
+    </>
   );
 };
-
+ 
 export default Navbar;
