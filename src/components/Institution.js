@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import Navbar from "../components/Navbar";
-
-// import CustomCursor from "./cursor";
+import emailjs from "@emailjs/browser";
 import "../style/Institution.css";
 
 function HowItWorks() {
@@ -29,26 +28,91 @@ function HowItWorks() {
 }
 
 function ContactForm() {
+  const form = useRef();
+  const [status, setStatus] = useState("");
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+    setStatus("sending");
+
+    emailjs
+      .sendForm(
+        "service_lagtknp", // ✅ Your EmailJS service ID
+        "template_duhup25", // ✅ Your EmailJS template ID
+        form.current,
+        "TSRsf-ZxaarV3fTup" // ⚠️ Replace with your EmailJS public key
+      )
+      .then(
+        (result) => {
+          console.log("Email sent:", result.text);
+          setStatus("success");
+          e.target.reset();
+          setTimeout(() => setStatus(""), 4000);
+        },
+        (error) => {
+          console.error("Error:", error.text);
+          setStatus("error");
+          setTimeout(() => setStatus(""), 4000);
+        }
+      );
+  };
+
   return (
     <div className="cf-container">
-      <form className="cf-form">
-        <input type="text" placeholder="Name" className="cf-input" />
-        <input type="text" placeholder="Institute Name" className="cf-input" />
-        <input type="email" placeholder="E-Mail Address" className="cf-input" />
-        <input type="tel" placeholder="Phone Number" className="cf-input" />
+      <form ref={form} onSubmit={sendEmail} className="cf-form">
+        <input
+          type="text"
+          name="name"
+          placeholder="Name"
+          className="cf-input"
+          required
+        />
+        <input
+          type="text"
+          name="institute"
+          placeholder="Institute Name"
+          className="cf-input"
+          required
+        />
+        <input
+          type="email"
+          name="email"
+          placeholder="E-Mail Address"
+          className="cf-input"
+          required
+        />
+        <input
+          type="tel"
+          name="phone"
+          placeholder="Phone Number"
+          className="cf-input"
+          required
+        />
         <textarea
+          name="message"
           placeholder="Your Message"
           className="cf-textarea"
-          rows={7}
+          rows={6}
+          required
         ></textarea>
+
         <div className="cf-submit-wrap">
-          <button type="submit" className="cf-submit-btn">
-            Submit Now
+          <button
+            type="submit"
+            className="cf-submit-btn"
+            disabled={status === "sending"}
+          >
+            {status === "sending" ? "Sending..." : "Submit Now"}
           </button>
-          <button type="button" className="cf-submit-btn">
-            Attach File
-          </button>
+          <button type="button" className="cf-submit-btn"> Attach File </button>
         </div>
+
+        {status === "success" && (
+          <p className="cf-success">✅ Your message has been sent successfully!</p>
+        )}
+        {status === "error" && (
+          <p className="cf-error">❌ Oops! Something went wrong. Please try again.</p>
+        )}
       </form>
     </div>
   );
@@ -86,8 +150,6 @@ function Institution() {
       <Colleges />
       <ContactForm />
       <HowItWorks />
-  
-      {/* <CustomCursor />  */}
     </div>
   );
 }

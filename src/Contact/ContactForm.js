@@ -1,47 +1,73 @@
-import React from "react";
+import React, { useRef } from "react";
 import "../style/ContactFor.css";
 import contactImg from "../images/ai.jpg";
-
+import emailjs from "@emailjs/browser";
+ 
 function ContactForm() {
+  const form = useRef();
+ 
+  const sendEmail = (e) => {
+    e.preventDefault();
+ 
+    emailjs
+      .sendForm(
+        "service_pr62wu9",     // ✅ Your EmailJS Service ID
+        "template_gs1cnzz",    // ✅ Your Template ID
+        form.current,          // ✅ The actual form reference
+        "R69ZFR-rHZbYbxnGV"    // ✅ Your Public Key
+      )
+      .then(
+        () => {
+          alert("✅ Message sent successfully!");
+          form.current.reset();
+        },
+        (error) => {
+          console.error("EmailJS error:", error);
+          alert("❌ Failed to send message. Please try again.");
+        }
+      );
+  };
+ 
   return (
     <div className="contact-container">
       {/* ✉️ Left Section - Form */}
       <div className="contact-form-section">
         <h2>Have Questions? We're Just a Message Away!</h2>
-        <form className="form-fields">
+ 
+        <form ref={form} onSubmit={sendEmail} className="form-fields">
           <div className="row">
             <div>
               <label>First Name</label>
-              <input type="text" name="firstName" />
+              <input type="text" name="firstName" required />
             </div>
             <div>
               <label>Last Name</label>
-              <input type="text" name="lastName" />
+              <input type="text" name="lastName" required />
             </div>
           </div>
-
-          <label>E-mail</label>
-          <input type="email" name="email" />
-
+ 
+          <label>Email</label>
+          <input type="email" name="email" required />
+ 
           <label>Phone Number</label>
-          <input type="text" name="phone" />
-
+          <input type="text" name="phone" required />
+ 
           <label>Subject</label>
-          <input type="text" name="subject" />
-
+          <input type="text" name="subject" required />
+ 
           <label>Message</label>
-          <textarea name="message" rows="4"></textarea>
-
+          <textarea name="message" rows="4" required></textarea>
+ 
           <button type="submit" className="send-btn">
             Send Message
           </button>
         </form>
       </div>
-
+ 
       {/* 📞 Right Section - Info */}
       <div className="contact-info-section">
         <img src={contactImg} alt="Office" className="contact-img" />
-
+ 
         <div className="info">
           <div className="info-block">
             <span className="icon mail" />
@@ -50,7 +76,7 @@ function ContactForm() {
               <div>contactnimacademy@gmail.com</div>
             </div>
           </div>
-
+ 
           <div className="info-block">
             <span className="icon phone" />
             <div>
@@ -58,7 +84,7 @@ function ContactForm() {
               <div>+91-7397224594</div>
             </div>
           </div>
-
+ 
           <div className="info-block">
             <span className="icon address" />
             <div>
@@ -69,7 +95,7 @@ function ContactForm() {
               </div>
             </div>
           </div>
-
+ 
           <div className="info-block">
             <span className="icon hours" />
             <div>
@@ -82,5 +108,5 @@ function ContactForm() {
     </div>
   );
 }
-
+ 
 export default ContactForm;

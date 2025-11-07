@@ -1,100 +1,148 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap");
 
-/* Outer Container */
+/* 🌐 Outer Container */
 .contact-form-outer {
-  background: #0655a5;
-  border-radius: 18px;
+  background: linear-gradient(180deg, #0c5fba 0%, #19c3ed 100%);
+  border-radius: 20px;
   width: 100%;
-  max-width: 440px;
-  margin: 40px auto;
-  padding: 36px 0;
-  box-shadow: 0 1px 16px rgba(21, 79, 148, 0.09);
+  max-width: 480px;
+  margin: 50px auto;
+  padding: 40px 0;
+  box-shadow: 0 6px 24px rgba(21, 79, 148, 0.15);
   transition: all 0.3s ease;
+  color: #fff;
 }
 
-/* Inner Form */
+/* 🧩 Inner Form */
 .contact-form-inner {
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  width: 90%;
+  gap: 22px;
+  width: 88%;
   margin: 0 auto;
 }
 
-/* Inputs & Textarea */
+/* ✏️ Input & Textarea */
 .contact-input,
 .contact-textarea {
-  font-family: 'Montserrat', Arial, sans-serif;
+  font-family: "Montserrat", Arial, sans-serif;
   font-size: clamp(1rem, 2vw, 1.08rem);
-  border-radius: 8px;
+  border-radius: 10px;
   border: none;
   padding: 14px 16px;
-  background: #fff;
+  background: #ffffff;
   color: #23272b;
   font-weight: 500;
   resize: none;
-  transition: box-shadow 0.2s ease;
-}
-
-/* Focus effect */
-.contact-input:focus,
-.contact-textarea:focus {
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(6, 85, 165, 0.25);
-}
-
-/* Submit Button */
-.contact-submit {
-  background: #ffffff;
-  color: #0655a5;
-  font-weight: 600;
-  font-size: 1rem;
-  padding: 12px 30px;
-  border-radius: 8px;
-  border: none;
-  align-self: center;
-  cursor: pointer;
   transition: all 0.25s ease;
 }
 
+.contact-input::placeholder,
+.contact-textarea::placeholder {
+  color: #999;
+  font-weight: 500;
+}
+
+/* ✨ Focus effect */
+.contact-input:focus,
+.contact-textarea:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(25, 195, 237, 0.35);
+}
+
+/* 🚀 Submit Button */
+.contact-submit {
+  background: #ffffff;
+  color: #0655a5;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 13px 32px;
+  border-radius: 10px;
+  border: none;
+  align-self: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  letter-spacing: 0.5px;
+}
+
 .contact-submit:hover {
-  background: #f0f4ff;
+  background: #f1f7ff;
   transform: translateY(-2px);
 }
 
-/* ✅ Responsive Design */
+.contact-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ✅ Success Message */
+.contact-success {
+  color: #b5f65d;
+  font-weight: 600;
+  text-align: center;
+  font-size: 0.95rem;
+  margin-top: 10px;
+  animation: fadeIn 0.4s ease;
+}
+
+/* ❌ Error Message */
+.contact-error {
+  color: #ff4b4b;
+  font-weight: 600;
+  text-align: center;
+  font-size: 0.95rem;
+  margin-top: 10px;
+  animation: fadeIn 0.4s ease;
+}
+
+/* ✨ Fade animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
 /* 📱 Small Mobiles */
 @media (max-width: 480px) {
   .contact-form-outer {
     width: 92%;
     padding: 28px 0;
-    border-radius: 14px;
-    margin: 24px auto;
+    border-radius: 16px;
+    margin: 28px auto;
   }
 
   .contact-form-inner {
-    width: 95%;
-    gap: 20px;
+    width: 92%;
+    gap: 18px;
   }
 
   .contact-input,
   .contact-textarea {
     padding: 12px;
-    font-size: 0.98rem;
+    font-size: 0.95rem;
   }
 
   .contact-submit {
     width: 100%;
-    font-size: 1rem;
+    font-size: 0.95rem;
     padding: 12px 0;
+  }
+
+  .contact-success,
+  .contact-error {
+    font-size: 0.9rem;
   }
 }
 
 /* 📲 Tablets & Medium Screens */
 @media (min-width: 481px) and (max-width: 992px) {
   .contact-form-outer {
-    max-width: 500px;
+    max-width: 520px;
     padding: 36px 0;
   }
 
@@ -104,18 +152,22 @@
 
   .contact-input,
   .contact-textarea {
-    font-size: 1.05rem;
+    font-size: 1rem;
+  }
+
+  .contact-submit {
+    font-size: 1rem;
   }
 }
 
 /* 💻 Large Screens */
 @media (min-width: 1200px) {
   .contact-form-outer {
-    max-width: 500px;
+    max-width: 520px;
     padding: 48px 0;
   }
 
   .contact-submit {
-    font-size: 1.1rem;
+    font-size: 1.05rem;
   }
 }
